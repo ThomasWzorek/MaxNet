@@ -69,18 +69,12 @@
     </property>
     <addaction name="actionNew_Window"/>
     <addaction name="actionNew_Tab"/>
+    <addaction name="actionRefresh"/>
     <addaction name="actionClose_Tab"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuBrowse">
-    <property name="title">
-     <string>Browse</string>
-    </property>
-    <addaction name="actionReload"/>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuBrowse"/>
   </widget>
   <action name="actionNew_Window">
    <property name="text">
@@ -114,9 +108,9 @@
     <string>Ctrl+W</string>
    </property>
   </action>
-  <action name="actionReload">
+  <action name="actionRefresh">
    <property name="text">
-    <string>Reload</string>
+    <string>Refresh</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>

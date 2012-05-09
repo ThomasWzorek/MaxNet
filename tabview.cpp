@@ -1,13 +1,13 @@
 #include "tabview.h"
 #include "ui_tabview.h"
 #include <QtWebKit/QWebView>
-
+#include <cstdio>
 TabView::TabView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabView)
 {
-    Title = "This is my title";
     ui->setupUi(this);
+    Title = "This is my title";
     ui->TabMainView->load(QUrl(HOMEPAGE));
     ui->TabMainView->show();
     Title = ui->TabMainView->title();
@@ -23,21 +23,16 @@ QString TabView::GetTitle()
     return Title;
 }
 
-void TabView::Reload()
+void TabView::SendSignal(FLAGS flags)
 {
-    ui->TabMainView->setUrl(ui->TabMainView->url());
-    Title = ui->TabMainView->title();
-}
-
-void TabView::Stop()
-{
-    ui->TabMainView->stop();
-    Title = ui->TabMainView->title();
-}
-
-void TabView::Home()
-{
-    ui->TabMainView->load(QUrl(HOMEPAGE));
+    if(flags.refresh == true){
+        printf("Refreshing is buggy. Do not use!\n");
+    } else if(flags.Stop == true){
+        ui->TabMainView->stop();
+    } else if(flags.GoHome == true){
+        ui->Address_Bar->setText(HOMEPAGE);
+        ui->TabMainView->load(QUrl(HOMEPAGE));
+    }
 }
 
 void TabView::on_BackButton_clicked()
@@ -76,6 +71,5 @@ void TabView::on_Go_Button_clicked()
 
 void TabView::on_TabMainView_urlChanged(const QUrl &arg1)
 {
-    ui->Address_Bar->setText(ui->TabMainView->url().toString());
-    Title = ui->TabMainView->title();
+    ui->Address_Bar->setText(arg1.toString());
 }

@@ -15,12 +15,18 @@ class TabView : public QWidget
     Q_OBJECT
     
 public:
+    typedef struct {
+        bool refresh;
+        bool GoHome ;
+        bool Stop;
+    }FLAGS;
+
     explicit TabView(QWidget *parent = 0);
     QString GetTitle();
-    void Reload();
-    void Stop();
-    void Home();
+    void SendSignal(FLAGS flags);
     ~TabView();
+
+
     
 private slots:
     void on_BackButton_clicked();
@@ -29,6 +35,7 @@ private slots:
     void on_TabMainView_urlChanged(const QUrl &arg1);
 
 private:
+
     Ui::TabView *ui;
     QString Title;
 };

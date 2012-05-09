@@ -1,6 +1,6 @@
 #include "maxnet.h"
 #include "ui_maxnet.h"
-
+#include <cstdio>
 using namespace std;
 
 MaxNet::MaxNet(QWidget *parent) :
@@ -23,6 +23,7 @@ MaxNet::~MaxNet()
 void MaxNet::on_actionNew_Window_triggered()
 {
     MaxNet New;
+    New.create();
 }
 
 void MaxNet::on_actionNew_Tab_triggered()
@@ -43,8 +44,9 @@ void MaxNet::on_actionQuit_triggered()
 
 void MaxNet::on_actionClose_Tab_triggered()
 {
-    delete Tabs[ui->tabWidget->currentIndex()];
+    int tmp = ui->tabWidget->currentIndex();
     ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+    delete Tabs[tmp];
     TabCount--;
     if(TabCount == 0){
         TabCount++;
@@ -52,7 +54,11 @@ void MaxNet::on_actionClose_Tab_triggered()
     }
 }
 
-void MaxNet::on_actionReload_triggered()
+void MaxNet::on_actionRefresh_triggered()
 {
-    Tabs[ui->tabWidget->currentIndex()]->Reload();
+    TabView::FLAGS FlagsToSend;
+    FlagsToSend.refresh = true;
+    FlagsToSend.GoHome = false;
+    FlagsToSend.Stop = false;
+    Tabs[ui->tabWidget->currentIndex()]->SendSignal(FlagsToSend);
 }
