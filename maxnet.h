@@ -21,9 +21,8 @@ private slots:
     void on_actionNew_Window_triggered();
     void on_actionNew_Tab_triggered();
     void on_actionQuit_triggered();
-
     void on_actionClose_Tab_triggered();
-
+    void on_actionReload_triggered();
 private:
     Ui::MaxNet *ui;
     std::vector<TabView*> Tabs;

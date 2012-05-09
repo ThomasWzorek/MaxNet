@@ -11,7 +11,7 @@ MaxNet::MaxNet(QWidget *parent) :
     Tabs.resize(TabCount*5);
     Tabs.at(TabCount)= new TabView;
     ui->setupUi(this);
-    ui->tabWidget->insertTab(TabCount,Tabs[TabCount], QString("Test"));
+    ui->tabWidget->insertTab(TabCount,Tabs[TabCount], Tabs[TabCount]->GetTitle());
     TabCount++;
 }
 
@@ -33,7 +33,7 @@ void MaxNet::on_actionNew_Tab_triggered()
         Tabs.resize(TabCount*2);
         Tabs[TabCount] = new TabView;
     }
-    ui->tabWidget->insertTab(TabCount,Tabs[TabCount], QString("Test"));
+    ui->tabWidget->insertTab(TabCount,Tabs[TabCount], Tabs[TabCount]->GetTitle());
 }
 
 void MaxNet::on_actionQuit_triggered()
@@ -50,4 +50,9 @@ void MaxNet::on_actionClose_Tab_triggered()
         TabCount++;
         ui->tabWidget->insertTab(TabCount,Tabs[TabCount], Tabs.at(TabCount)->GetTitle());
     }
+}
+
+void MaxNet::on_actionReload_triggered()
+{
+    Tabs[ui->tabWidget->currentIndex()]->Reload();
 }
